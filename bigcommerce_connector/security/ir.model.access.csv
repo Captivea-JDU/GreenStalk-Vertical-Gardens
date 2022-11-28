@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ecommerce_channel_user,ecommerce.channel.user,model_ecommerce_channel,base.group_user,1,0,0,0
+access_ecommerce_channel_admin,ecommerce.channel.admin,model_ecommerce_channel,base.group_erp_manager,1,1,1,0
+access_ecommerce_channel_system,ecommerce.channel.system,model_ecommerce_channel,base.group_system,1,1,1,1
+access_exclude_inventory_sync_user,exclude.inventory.sync.user,model_exclude_inventory_sync,base.group_user,1,1,1,1
+access_product_channel_category_public,product.channel.category.public,model_product_channel_category,,1,0,0,0
+access_product_channel_category_user,product.channel.category.user,model_product_channel_category,base.group_user,1,0,0,0
+access_product_channel_category_admin,product.channel.category.admin,model_product_channel_category,bigcommerce_connector.group_listing_manager,1,1,1,1
+access_payment_method_mapping_user,channel.payment.method.mapping.user,model_payment_method_mapping,base.group_user,1,0,0,0
+access_payment_method_mapping_admin,channel.payment.method.mapping.admin,model_payment_method_mapping,base.group_erp_manager,1,1,1,1
+access_order_process_rule_user,order.process.rule.user,model_order_process_rule,base.group_user,1,0,0,0
+access_order_process_rule_admin,order.process.rule.admin,model_order_process_rule,base.group_erp_manager,1,1,1,1
+access_order_status_channel_user,order.status.channel.user,model_order_status_channel,base.group_user,1,0,0,0
+access_order_status_channel_admin,order.status.channel.admin,model_order_status_channel,base.group_erp_manager,1,1,1,1
+access_channel_payment_gateway_user,channel.payment.gateway.user,model_channel_payment_gateway,base.group_user,1,0,0,0
+access_channel_payment_gateway_admin,channel.payment.gateway.admin,model_channel_payment_gateway,base.group_erp_manager,1,1,1,1
