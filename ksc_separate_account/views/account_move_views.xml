@@ -20,11 +20,12 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//button[@name='343'][1]" position="attributes">
+            <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
                 <attribute name="context">{'team_id': team_id}</attribute>
             </xpath>
-            <xpath expr="//button[@name='343'][2]" position="attributes">
-                <attribute name="context">{'default_advance_payment_method': 'percentage','team_id': team_id}</attribute>
+            <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+                <attribute name="context">{'default_advance_payment_method': 'percentage','team_id': team_id}
+                </attribute>
             </xpath>
         </field>
     </record>
