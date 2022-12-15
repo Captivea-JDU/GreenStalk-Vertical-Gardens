@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="bigcommerce_connector.FieldBooleanButton" owl="1">
+        <div class="o_stat_info">
+            <span t-attf-class="o_stat_text o_not_hover {{props.text_color}}">
+                <t t-esc="props.text"/>
+            </span>
+            <span t-attf-class="o_stat_text o_hover {{props.hover_color}}">
+                <t t-esc="props.hover"/>
+            </span>
+        </div>
+    </t>
+</templates>
