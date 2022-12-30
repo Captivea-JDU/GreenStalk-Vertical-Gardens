@@ -12,7 +12,7 @@ class AccountInvoiceLine(models.Model):
         if self._context.get('team_id'):
             sales_team = self.env['crm.team'].browse(
                 self._context.get('team_id') or self._context['team_id'])
-            if sales_team.name == 'BigCommerce':
+            if sales_team.name == 'GreenStalk Gardens store':
                 bigcomm_sale_acc = self.env['account.account'].search([('code', '=', '4040')])
                 return bigcomm_sale_acc
             elif sales_team.name == 'Amazon':
