@@ -15,7 +15,7 @@
     Also Possible To Import Order From Marketplace/Store.
     We also Provide the ups,dhl,bigcommerce,shiphero,gls,fedex,usps,easyship,stamp.com,dpd,canada post,bpost
 """,
-    'depends': ['delivery', 'sale', 'base'],
+    'depends': ['delivery', 'sale', 'base', 'sale_amazon'],
     'data': [
         'security/ir.model.access.csv',
         'data/ir_cron.xml',

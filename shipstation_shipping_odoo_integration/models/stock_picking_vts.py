@@ -343,3 +343,6 @@ class StockPicking(models.Model):
                  'fault_operaion': True,
                  'shipstation_operation': 'shipment'})
 
+    # Bypass this method as we don't need tracking number for this. so we bypass this warning for amazone order
+    def _check_carrier_details_compliance(self):
+        pass
