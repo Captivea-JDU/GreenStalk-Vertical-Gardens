@@ -7,7 +7,7 @@
     'data': [
         'views/account_move_views.xml',
     ],
-    "depends": ["sale"],
+    "depends": ["sale", "multichannel_order"],
     "installable": True,
     "application": True,
 }
