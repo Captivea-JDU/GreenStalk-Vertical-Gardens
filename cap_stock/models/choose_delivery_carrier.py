@@ -12,5 +12,4 @@ class ChooseDeliveryCarrier(models.TransientModel):
         if self.order_id and self.order_id.picking_ids:
             for picking in self.order_id.picking_ids:
                 picking.carrier_id = self.carrier_id.id
-                picking.carrier_tracking_ref = str(random.randint(100000000,999999999))
         return res
