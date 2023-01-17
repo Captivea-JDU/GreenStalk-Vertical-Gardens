@@ -213,20 +213,19 @@ class DeliveryCarrier(models.Model):
     def get_order_item_details(self, picking):
         res = []
         count = 0
-        for move_line in picking.move_lines:
+        for move_line in picking.move_lines.mapped('sale_line_id'):
             total_weight = self.get_total_weight(move_line.product_id.weight)
             count = count + 1
             item_dict = {
                 "lineItemKey": "%s" % (count),
                 "sku": "%s" % (move_line.product_id and move_line.product_id.default_code),
-                "name": "%s" % (move_line.sale_line_id and move_line.sale_line_id.name),
+                "name": "%s" % (move_line and move_line.product_id.name),
                 "weight": {
                     "value": "%s" % (total_weight),
                     "units": self.weight_uom or "pounds"
                 },
                 "quantity": int(move_line.product_uom_qty),
-                "unitPrice": "%s" % (
-                    move_line.sale_line_id.price_unit if move_line.sale_line_id.price_unit else move_line.product_id and move_line.product_id.lst_price),
+                "unitPrice": "%s" % (0),
                 "productId": "%s" % (move_line.product_id and move_line.product_id.id)}
             res.append(item_dict)
         return res
