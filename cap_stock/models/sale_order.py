@@ -37,7 +37,7 @@ class SaleOrder(models.Model):
     def onchange_get_tags(self):
         for result in self:
             result.tag_ids = False
-            if result.team_id and result.team_id.name == 'Greenstalk Vertical Gardens':
+            if result.team_id and result.team_id.name == 'GreenStalk Gardens store':
                 if result.amount_total > 1000:
                     large_order_tag = self.env['crm.tag'].search([('name', '=', 'Large Order')])
                     if large_order_tag:
