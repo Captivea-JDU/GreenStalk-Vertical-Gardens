@@ -23,10 +23,17 @@ class SaleOrder(models.Model):
             if result.customer_message:
                 customer_added_note_tag = self.env['crm.tag'].search([('name', '=', 'Customer Added Note')])
                 if customer_added_note_tag:
-                    result.tag_ids = [(5, 0, 0),(6, 0, customer_added_note_tag.ids)]                
+                    result.tag_ids = [(5, 0, 0),(6, 0, customer_added_note_tag.ids)]
+
+            if result.partner_id:
+                us_country = self.env['res.country'].search([('code', '=', 'US')])
+                if result.partner_id.country_id.id != us_country.id:
+                    custom_tag = self.env['crm.tag'].search([('name', '=', 'Customs')])
+                    if custom_tag:
+                        result.tag_ids = [(5, 0, 0),(6, 0, custom_tag.ids)]
         return result
 
-    @api.onchange('order_line', 'partner_invoice_id', 'partner_shipping_id', 'customer_message', 'team_id')
+    @api.onchange('order_line', 'partner_invoice_id', 'partner_shipping_id', 'customer_message', 'team_id', 'partner_id')
     def onchange_get_tags(self):
         for result in self:
             result.tag_ids = False
@@ -45,6 +52,13 @@ class SaleOrder(models.Model):
                     customer_added_note_tag = self.env['crm.tag'].search([('name', '=', 'Customer Added Note')])
                     if customer_added_note_tag:
                         result.tag_ids = [(5, 0, 0),(6, 0, customer_added_note_tag.ids)]
+
+                if result.partner_id:
+                    us_country = self.env['res.country'].search([('code', '=', 'US')])
+                    if result.partner_id.country_id.id != us_country.id:
+                        custom_tag = self.env['crm.tag'].search([('name', '=', 'Customs')])
+                        if custom_tag:
+                            result.tag_ids = [(5, 0, 0),(6, 0, custom_tag.ids)]
 
     def write(self, vals):
         if 'tag_ids' in vals and vals.get('tag_ids'):
