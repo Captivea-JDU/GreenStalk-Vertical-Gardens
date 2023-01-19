@@ -62,10 +62,10 @@ class SingularOrderDataInTrans(common_formatter.DataTrans):
         lines = []
         has_discount = float_compare(order_data.get('discount_amount', 0), 0, precision_digits=2) > 0
 
-        if has_discount or order_data.get('coupons', []):
-            lines.append((0, 0, {'display_type': 'line_section',
-                                 'sequence': 2,
-                                 'name': 'Discounts'}))
+        # if has_discount or order_data.get('coupons', []):
+        #     lines.append((0, 0, {'display_type': 'line_section',
+        #                          'sequence': 2,
+        #                          'name': 'Discounts'}))
 
         if has_discount:
             discount_vals = {
