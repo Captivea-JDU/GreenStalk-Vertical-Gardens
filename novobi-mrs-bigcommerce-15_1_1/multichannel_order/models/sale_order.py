@@ -176,6 +176,7 @@ class SaleOrder(models.Model):
     shipping_status = fields.Selection([
         ('unshipped', 'Unshipped'),
         ('partially_shipped', 'Partially Shipped'),
+        ('send_to_shipstation', 'Sent to ShipStation'),
         ('shipped', 'Fully Shipped')
     ], string='Shipping Status', compute='_compute_shipping_status', store=True)
 
@@ -292,7 +293,7 @@ class SaleOrder(models.Model):
             return [('channel_id.platform', 'not in', (False, ))]
         return [('channel_id.platform', 'in', (False, ))]
 
-    @api.depends('order_line', 'order_line.product_id', 'order_line.product_uom_qty', 'order_line.qty_delivered')
+    @api.depends('order_line', 'order_line.product_id', 'order_line.product_uom_qty', 'order_line.qty_delivered','picking_ids.shipstation_carrier_code', 'shipstation_order_id')
     def _compute_shipping_status(self):
         self.mapped('order_line')  # Caching
         self.mapped('order_line.product_id')  # Caching
@@ -304,7 +305,9 @@ class SaleOrder(models.Model):
                     res = 'unshipped'
                 elif any(line.qty_delivered < line.product_uom_qty for line in deliverable_lines):
                     res = 'partially_shipped'
-                else:
+                elif record.shipstation_order_id and not record.picking_ids.filtered(lambda rec: rec.shipstation_carrier_code):
+                    res = 'send_to_shipstation'
+                elif record.shipstation_order_id and record.picking_ids.filtered(lambda rec: rec.shipstation_carrier_code):
                     res = 'shipped'
             else:
                 res = 'unshipped'
