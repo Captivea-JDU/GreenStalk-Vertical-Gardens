@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_form_inherit_cap_stock" model="ir.ui.view">
+        <field name="name">stock.picking.inherited.form.inherit.cap.stock</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <button name="action_set_quantities_to_reservation" position="before">
+                <button name="action_set_approved" attrs="{'invisible': [('state', '!=', 'to_approve')]}" string="Approved" type="object" class="btn-primary"/>
+            </button>
+            <field name="backorder_id" position="after">
+                <field name="is_approved" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -5,8 +5,7 @@
     'summary': '',
     'author': 'Captivea',
     'depends': ['sale', 'sales_team', 'delivery', 'sale_stock', 'multichannel_order'],
-    'data': [
-    ],
+    'data': ['views/stock_picking_views.xml'],
     'installable': True,
     'auto_install': False,
     'application': True,

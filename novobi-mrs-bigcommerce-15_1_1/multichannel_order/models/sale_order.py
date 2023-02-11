@@ -298,6 +298,7 @@ class SaleOrder(models.Model):
         self.mapped('order_line')  # Caching
         self.mapped('order_line.product_id')  # Caching
         for record in self:
+            res = ''
             deliverable_lines = record.order_line.filtered(
                 lambda l: l.product_id.type != 'service' or l.product_id.is_deliverable_service)
             if deliverable_lines:

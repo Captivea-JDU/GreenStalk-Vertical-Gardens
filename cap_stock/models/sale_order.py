@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     @api.model
     def create(self, vals):
         result = super(SaleOrder, self).create(vals)
-        if result.team_id and result.team_id.name == 'Greenstalk Vertical Gardens':
+        if result.team_id and result.team_id.name == 'GreenStalk Gardens store':
             if result.amount_total > 1000:
                 large_order_tag = self.env['crm.tag'].search([('name', '=', 'Large Order')])
                 if large_order_tag:
