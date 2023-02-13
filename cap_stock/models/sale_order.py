@@ -15,7 +15,7 @@ class SaleOrder(models.Model):
                 if large_order_tag:
                     result.tag_ids = [(5, 0, 0),(6, 0, large_order_tag.ids)]
 
-            if result.partner_invoice_id != result.partner_shipping_id and result.amount_total > 150:
+            if result.partner_invoice_id.parent_id != result.partner_shipping_id.parent_id and result.amount_total > 150:
                 billing_address_mismatch_tag = self.env['crm.tag'].search([('name', '=', 'Billing Address Mismatch')])
                 if billing_address_mismatch_tag:
                     result.tag_ids = [(5, 0, 0),(6, 0, billing_address_mismatch_tag.ids)]
@@ -43,7 +43,7 @@ class SaleOrder(models.Model):
                     if large_order_tag:
                         result.tag_ids = [(5, 0, 0),(6, 0, large_order_tag.ids)]
 
-                if result.partner_invoice_id != result.partner_shipping_id and result.amount_total > 150:
+                if result.partner_invoice_id.parent_id != result.partner_shipping_id.parent_id and result.amount_total > 150:
                     billing_address_mismatch_tag = self.env['crm.tag'].search([('name', '=', 'Billing Address Mismatch')])
                     if billing_address_mismatch_tag:
                         result.tag_ids = [(5, 0, 0),(6, 0, billing_address_mismatch_tag.ids)]

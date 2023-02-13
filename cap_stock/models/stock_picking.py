@@ -10,9 +10,11 @@ class StockPicking(models.Model):
 
     state = fields.Selection(selection_add=[('to_approve', 'To Approve'),('assigned',)])
     is_approved = fields.Boolean(string='Approved')
+    sale_note = fields.Text(related='sale_id.customer_message', string='Notes')
 
     def action_set_approved(self):
-        self.is_approved = True
+        for record in self:
+            record.is_approved = True
 
     @api.model
     def create(self, vals):
