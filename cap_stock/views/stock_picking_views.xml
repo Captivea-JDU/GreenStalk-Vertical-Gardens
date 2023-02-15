@@ -12,7 +12,7 @@
                 <field name="is_approved" invisible="1"/>
             </field>
             <field name="origin" position="after">
-                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" string="Inventory Tags"/>
             </field>
         </field>
     </record>
