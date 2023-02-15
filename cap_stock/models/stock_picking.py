@@ -11,22 +11,13 @@ class StockPicking(models.Model):
     state = fields.Selection(selection_add=[('to_approve', 'To Approve'),('assigned',)])
     is_approved = fields.Boolean(string='Approved')
     sale_note = fields.Text(related='sale_id.customer_message', string='Notes')
+    tag_ids = fields.Many2many('crm.tag', related='sale_id.tag_ids', string='Tags')
 
     def action_set_approved(self):
         for record in self:
             record.is_approved = True
 
-    @api.model
-    def create(self, vals):
-        result = super(StockPicking, self).create(vals)
-        if result.origin:
-            sale_order = self.env['sale.order'].search([('name', '=', result.origin)])
-            if sale_order and sale_order.tag_ids:
-                sale_tag = sale_order.tag_ids[0].name
-                result.x_studio_inventory_tags = sale_tag
-        return result
-
-    @api.depends('move_type', 'immediate_transfer', 'move_lines.state', 'move_lines.picking_id', 'is_approved', 'x_studio_inventory_tags')
+    @api.depends('move_type', 'immediate_transfer', 'move_lines.state', 'move_lines.picking_id', 'is_approved', 'tag_ids')
     def _compute_state(self):
         ''' State of a picking depends on the state of its related stock.move
         - Draft: only used for "planned pickings"
@@ -69,7 +60,8 @@ class StockPicking(models.Model):
             else:
                 relevant_move_state = self.env['stock.move'].browse(picking_move_lines[picking_id])._get_relevant_state_among_moves()
                 # Custom Code Start
-                if picking.x_studio_inventory_tags in ('Large Order', 'Billing Address Mismatch', 'Customer Added Note', 'Customs'):
+                pick_tags = picking.tag_ids.mapped('name')
+                if 'Large Order' in pick_tags or 'Billing Address Mismatch' in pick_tags or 'Customer Added Note' in pick_tags or 'Customs' in pick_tags:
                     if relevant_move_state not in ('draft', 'cancel', 'done') and not picking.is_approved:
                         picking.state = 'to_approve'
                     elif picking.immediate_transfer and relevant_move_state not in ('draft', 'cancel', 'done') and picking.is_approved:
