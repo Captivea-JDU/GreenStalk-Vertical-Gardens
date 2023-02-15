@@ -61,13 +61,3 @@ class SaleOrder(models.Model):
                         custom_tag = self.env['crm.tag'].search([('name', '=', 'Customs')])
                         if custom_tag:
                             result.tag_ids |= custom_tag
-
-    def write(self, vals):
-        if 'tag_ids' in vals and vals.get('tag_ids'):
-            if self.picking_ids:
-                for picking in self.picking_ids:
-                    if vals.get('tag_ids')[0][2]:
-                        tags = self.env['crm.tag'].search([('id', 'in', vals.get('tag_ids')[0][2])])
-                        if tags:
-                            picking.write({'x_studio_inventory_tags': tags[0].name})
-        return super(SaleOrder, self).write(vals)
