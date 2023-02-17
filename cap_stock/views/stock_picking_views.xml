@@ -25,6 +25,9 @@
             <field name="state" position="after">
                 <field name="sale_note"/>
             </field>
+            <field name="schedule_date" position="before">
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" string="Inventory Tags"/>
+            </field>
         </field>
     </record>
 
