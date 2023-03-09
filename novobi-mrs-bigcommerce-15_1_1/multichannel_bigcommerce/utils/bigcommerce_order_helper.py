@@ -114,8 +114,6 @@ class SingularOrderDataInTrans(common_formatter.DataTrans):
             'channel_date_created': order['date_order'],
             'channel_order_ref': order['customer_reference'],
             'payment_gateway_code': order['payment_method'],
-            'staff_notes': order['staff_notes'],
-            'customer_message': order['customer_message'],
             'status_id': order['status_id'],
             'currency_code': order['currency_code'],
         }
