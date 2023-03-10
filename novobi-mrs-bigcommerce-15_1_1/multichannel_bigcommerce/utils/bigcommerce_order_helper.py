@@ -116,6 +116,8 @@ class SingularOrderDataInTrans(common_formatter.DataTrans):
             'payment_gateway_code': order['payment_method'],
             'status_id': order['status_id'],
             'currency_code': order['currency_code'],
+            'staff_notes': order['staff_notes'],
+            'customer_message': order['customer_message'],
         }
         
     @classmethod
