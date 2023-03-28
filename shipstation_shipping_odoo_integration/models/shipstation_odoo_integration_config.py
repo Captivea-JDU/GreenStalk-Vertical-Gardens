@@ -292,7 +292,7 @@ class ShipstationOdooIntegationConfig(models.Model):
                        "Content-Type": "application/json"}
             try:
                 response_data = request(method='GET', url=url, headers=headers)
-                 time.sleep(2)
+         
             except Exception as e:
                 response_msg = "Shipstation Import Warehouse Issue %s, %s" % (self.name, e)
                 self.create_shipstation_operation_details(operation_id, response_msg, True)
