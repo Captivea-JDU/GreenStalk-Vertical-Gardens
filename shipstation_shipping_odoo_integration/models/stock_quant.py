@@ -1,6 +1,7 @@
 import base64
 import json
 import logging
+import time
 from requests import request
 from odoo import fields,models,api,_
 from odoo.exceptions import ValidationError
@@ -30,6 +31,7 @@ class ShipstationPackageDetails(models.Model):
         _logger.info("Request Data: %s" % (data))
         try:
             response_body = request(method='POST', url=url, data=data, headers=headers)
+            time.sleep(2)
         except Exception as e:
             raise ValidationError(e)
         return response_body

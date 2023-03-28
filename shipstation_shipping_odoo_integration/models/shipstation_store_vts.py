@@ -4,6 +4,7 @@ import base64
 import logging
 import os
 import os.path
+import time
 from io import StringIO
 from csv import DictWriter
 from odoo import fields, models, api, _, registry, SUPERUSER_ID
@@ -11,7 +12,7 @@ from datetime import datetime
 from requests import request
 from threading import Thread
 from dateutil.relativedelta import relativedelta
-import time
+
 
 _logger = logging.getLogger("Shipstation")
 
@@ -105,6 +106,7 @@ class shipstation_store_vts(models.Model):
                        "Content-Type": "application/json"}
             try:
                 response_data = request(method='GET', url=url, headers=headers)
+                time.sleep(2)
             except Exception as e:
                 response_msg = "Shipstation Import Customer Issue %s" % (e)
                 self.create_shipstation_operation_details(operation_id, response_msg, True, 'customer')

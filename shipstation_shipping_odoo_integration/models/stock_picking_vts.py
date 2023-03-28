@@ -2,6 +2,7 @@ import os
 import base64
 import binascii
 import logging
+import time
 from requests import request
 from PyPDF2 import PdfFileMerger
 from odoo.exceptions import ValidationError
@@ -254,6 +255,7 @@ class StockPicking(models.Model):
                        "Content-Type": "application/json"}
             try:
                 response_data = request(method='GET', url=url, headers=headers)
+                time.sleep(2)
             except Exception as e:
                 shipstation_operation_details.create(
                     {'operation_id': operation_id and operation_id.id,
