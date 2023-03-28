@@ -53,6 +53,7 @@ class ShipstationOdooIntegationConfig(models.Model):
         headers = {"Authorization": "%s" % authrization_data}
         try:
             response_data = request(method='GET', url=url, headers=headers)
+            time.sleep(1.5)
             return response_data
         except Exception as e:
             raise ValidationError(e)
