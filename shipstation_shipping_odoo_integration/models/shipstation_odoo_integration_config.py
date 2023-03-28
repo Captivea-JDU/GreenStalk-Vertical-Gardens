@@ -1,5 +1,6 @@
 import base64
 import logging
+import time
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError, Warning
 from requests import request
