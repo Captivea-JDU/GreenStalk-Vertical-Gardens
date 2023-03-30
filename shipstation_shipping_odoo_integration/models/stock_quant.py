@@ -31,7 +31,7 @@ class ShipstationPackageDetails(models.Model):
         _logger.info("Request Data: %s" % (data))
         try:
             response_body = request(method='POST', url=url, data=data, headers=headers)
-            time.sleep(2)
+            time.sleep(2.3)
         except Exception as e:
             raise ValidationError(e)
         return response_body

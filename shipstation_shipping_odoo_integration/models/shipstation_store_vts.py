@@ -106,7 +106,7 @@ class shipstation_store_vts(models.Model):
                        "Content-Type": "application/json"}
             try:
                 response_data = request(method='GET', url=url, headers=headers)
-                time.sleep(2)
+                time.sleep(2.3)
             except Exception as e:
                 response_msg = "Shipstation Import Customer Issue %s" % (e)
                 self.create_shipstation_operation_details(operation_id, response_msg, True, 'customer')
@@ -220,6 +220,7 @@ class shipstation_store_vts(models.Model):
         _logger.info('Import Order Request Data {}'.format(url))
         try:
             response_data = request(method='GET', url=url, headers=headers)
+            time.sleep(2.3)
             _logger.info('Import Order Response >>>>>> {}'.format(response_data))
         except Exception as e:
             response_msg = "Shipstation Import Order Issue %s" % (e)
