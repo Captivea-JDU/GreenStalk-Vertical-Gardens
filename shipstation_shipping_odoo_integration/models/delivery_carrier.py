@@ -322,12 +322,12 @@ class DeliveryCarrier(models.Model):
 
         if picking_sender_id and picking_receiver_id and picking_sender_id.country_id and picking_receiver_id.country_id and picking_sender_id.country_id.code != picking_receiver_id.country_id.code:
             check_commodity = picking.move_line_ids.mapped('product_id').filtered(
-                lambda produtct_id: not produtct_id.intrastat_id).mapped('name')
+                lambda product_id: not product_id.intrastat_id).mapped('name')
             if check_commodity:
                 raise ValidationError("You Are Sending International Shipment \n But {} has no commodity code".format(
                     ', '.join(check_commodity)))
             check_origin_country = picking.move_line_ids.mapped('product_id').filtered(
-                lambda produtct_id: not produtct_id.intrastat_origin_country_id).mapped('name')
+                lambda product_id: not product_id.intrastat_origin_country_id).mapped('name')
             if check_origin_country:
                 raise ValidationError(
                     "You Are Sending International Shipment \n But {} has no country origin code".format(
