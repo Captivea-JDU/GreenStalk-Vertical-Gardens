@@ -328,10 +328,10 @@ class DeliveryCarrier(models.Model):
 #                    ', '.join(check_commodity)))
             check_origin_country = picking.move_line_ids.mapped('product_id').filtered(
                 lambda product_id: not product_id.intrastat_origin_country_id).mapped('name')
-            if check_origin_country:
-                raise ValidationError(
-                    "You Are Sending International Shipment \n But {} has no country origin code".format(
-                        ', '.join(check_commodity)))
+#            if check_origin_country:
+#                raise ValidationError(
+#                    "You Are Sending International Shipment \n But {} has no country origin code".format(
+#                        ', '.join(check_commodity)))
             for move in picking.move_lines:
                 data = {
                     'description': "%s" % (move.product_id and move.product_id.name),
