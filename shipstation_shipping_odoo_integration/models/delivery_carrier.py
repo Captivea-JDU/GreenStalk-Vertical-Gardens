@@ -387,6 +387,8 @@ class DeliveryCarrier(models.Model):
                     # if response_data.json():
                     #     error_detail = {'error': error_code + " - " + error_message + " - %s" % (response_data.json())}
                     raise ValidationError("{}".format(error_detail))
+            else:
+                return [{'exact_price': 0.0, 'tracking_number': ''}]
 
     def shipstation_cancel_shipment(self, picking):
         shipment_id = picking.shipstation_shipment_id
